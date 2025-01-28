@@ -1,5 +1,14 @@
-import { Logger, Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { CreateQueenDto } from './dto/queen.dto';
+import { 
+  Logger,
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Delete,
+  Body,
+  Param } from '@nestjs/common';
+import { CreateQueenDto } from './dto/create-queen.dto';
+import { UpdateQueenDto } from './dto/update-queen.dto';
 import { QueenService } from './queen.service';
 import { Queen } from './interfaces/queen.interface';
 
@@ -26,5 +35,16 @@ export class QueenController {
   async findOne(@Param('id') id: string) {
     this.logger.verbose(`Finding queen with id: ${id}`);
     return this.QueenService.findOne(id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateQueenDto: UpdateQueenDto) {
+    return this.QueenService.update(id, updateQueenDto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    this.logger.verbose(`Deleting queen with id: ${id}`);
+    return this.QueenService.remove(id);
   }
 }

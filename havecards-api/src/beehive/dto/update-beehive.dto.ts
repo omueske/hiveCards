@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateBeeHiveDto {
+export class UpdateBeeHiveDto {
   @ApiProperty()
   number: number;
 

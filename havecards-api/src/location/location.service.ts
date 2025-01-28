@@ -33,8 +33,11 @@ export class LocationService {
     return this.LocationModel.findById(id).exec();
   }
 
-  update(id: number, updateLocationDto: UpdateLocationDto) {
-    return `This action updates a #${id} location`;
+  update(id: string, updateLocationDto: UpdateLocationDto) {
+    this.logger.verbose(
+      `Updating Location with id: ${id} with the following data: ${JSON.stringify(updateLocationDto)}`,
+    );
+    return this.LocationModel.updateOne({ _id: id }, updateLocationDto).exec();
   }
 
   remove(id: string) {

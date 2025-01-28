@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BeeHive } from './schemas/beehive.schema';
 import { CreateBeeHiveDto } from './dto/create-beehive.dto';
+import { UpdateBeeHiveDto } from './dto/update-beehive.dto';
 
 @Injectable()
 export class BeeHiveService {
@@ -31,6 +32,13 @@ export class BeeHiveService {
   findOne(id: string): Promise<BeeHive | null> {
     this.logger.verbose(`Finding beehive with id: ${id}`);
     return this.BeeHiveModel.findById(id).exec();
+  }
+
+  update(id: string, updateBeeHiveDto: UpdateBeeHiveDto) {
+    this.logger.verbose(
+      `Updating BeeHive with id: ${id} with the following data: ${JSON.stringify(updateBeeHiveDto)}`,
+    );
+    return this.BeeHiveModel.updateOne({ _id: id }, updateBeeHiveDto).exec();
   }
 
   remove(id: string) {
