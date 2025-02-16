@@ -8,6 +8,8 @@ async function bootstrap() {
     logger: new ConsoleLogger({ prefix: 'hivecards-api' }),
   });
 
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('HiveCards API')
     .setDescription('The HiveCards API')
